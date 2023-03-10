@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "320685907644",
+    "firebase_url": "https://pfe-2023-1d93b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "pfe-2023-1d93b",
+    "storage_bucket": "pfe-2023-1d93b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320685907644:android:4e369f7dd19e9194babab9",
+        "android_client_info": {
+          "package_name": "com.adi.pfe2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320685907644-dh2lje6bf3korhm7adrjukuekotn5mud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeSmOZJnLTLT7qmb3rcYZAIdC2SRPQ3Lk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320685907644-dh2lje6bf3korhm7adrjukuekotn5mud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
