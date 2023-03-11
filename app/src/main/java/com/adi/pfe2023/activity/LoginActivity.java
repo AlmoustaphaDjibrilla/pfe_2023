@@ -37,16 +37,46 @@ public class LoginActivity extends Activity {
         //Initialisation Firebase Auth
         mAuth= FirebaseAuth.getInstance();
 
+
+        /**
+         * Click sur le lien pour creer un nouveau compte
+         */
         txtCreerCompte.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Intent createAccount= new Intent(LoginActivity.this, RegisterActivity.class);
-//                        startActivity(createAccount);
+                        Intent createAccount= new Intent(LoginActivity.this, RegisterActivity.class);
+                        startActivity(createAccount);
+                    }
+                }
+        );
+
+        /**
+         * Click sur le button login pour se connecter
+         */
+        btnLogin.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
                         String mail= txtMailLogin.getText().toString();
                         String password= txtPasswordLogin.getText().toString();
 
                         loginMethod(mail, password);
+                    }
+                }
+        );
+
+        /**
+         * Click sur le lien "mot de passe oublié"
+         * pour recevoir un lien de réinitialisation de mot de passe
+         */
+        txtPasswordOublie.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String mail= txtMailLogin.getText().toString();
+
+                        resetPasswordMethod(mail);
                     }
                 }
         );
