@@ -95,7 +95,6 @@ public class LoginActivity extends Activity {
                     });
         }
     }
-
     private void resetPasswordMethod(String mail){
         if (mail==null || mail.equals("")){
             Toast.makeText(LoginActivity.this, "Veuillez saisir votre mail...", Toast.LENGTH_SHORT).show();
