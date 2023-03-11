@@ -135,6 +135,11 @@ public class LoginActivity extends Activity {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(LoginActivity.this, "Consultez votre messagerie électronique", Toast.LENGTH_LONG).show();
+                            Intent intentOuvrirGmail= getPackageManager()
+                                    .getLaunchIntentForPackage("com.google.android.gm");
+                            if (intentOuvrirGmail !=null){
+                                startActivity(intentOuvrirGmail);
+                            }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
