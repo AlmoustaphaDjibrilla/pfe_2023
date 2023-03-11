@@ -8,8 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.adi.pfe2023.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends Activity {
@@ -35,8 +41,12 @@ public class LoginActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent createAccount= new Intent(LoginActivity.this, RegisterActivity.class);
-                        startActivity(createAccount);
+//                        Intent createAccount= new Intent(LoginActivity.this, RegisterActivity.class);
+//                        startActivity(createAccount);
+                        String mail= txtMailLogin.getText().toString();
+                        String password= txtPasswordLogin.getText().toString();
+
+                        loginMethod(mail, password);
                     }
                 }
         );
@@ -54,6 +64,56 @@ public class LoginActivity extends Activity {
 
         txtMailLogin=findViewById(R.id.txtMailLogin);
         txtPasswordLogin= findViewById(R.id.txtPasswordLogin);
+    }
 
+
+    /**
+     * Cette méthode permet à
+     * un quelconque utilisateur
+     * de se connecter au système
+     * grâce à son mail et password
+     * @param mail
+     * @param password
+     */
+    private void loginMethod(String mail, String password){
+        if (mail==null || password==null || mail.equals("") || password.equals("")){
+            Toast.makeText(LoginActivity.this, "Veuillez saisir tous les champs", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mAuth.signInWithEmailAndPassword(mail, password)
+                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            Toast.makeText(LoginActivity.this, "Authentification réussi", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, "Données non correspondants", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    private void resetPasswordMethod(String mail){
+        if (mail==null || mail.equals("")){
+            Toast.makeText(LoginActivity.this, "Veuillez saisir votre mail...", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mAuth.sendPasswordResetEmail(mail)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(LoginActivity.this, "Consultez votre messagerie électronique", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, "Echec d'envoi de mail", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 }
