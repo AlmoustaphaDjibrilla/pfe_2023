@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 
 import com.adi.pfe2023.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,25 +50,18 @@ public class RegisterActivity extends Activity {
                 String password= txtPassword1.getText().toString();
 
                 mAuth.createUserWithEmailAndPassword(mail, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()){
-
-                                    //Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "createUserWithEmail:success");
-
-                                    FirebaseUser user= mAuth.getCurrentUser();
-                                   // Toast.makeText(RegisterActivity.this, "User crée avec succès", Toast.LENGTH_SHORT).show();
-                                }
-
-                                else {
-                                    //If sign in fails, display a message to thr user
-                                    Log.w(TAG, "createUserWithEmail: failure", task.getException());
-                                   // Toast.makeText(RegisterActivity.this, "Authentification failed", Toast.LENGTH_SHORT).show();
-                                }
+                            public void onSuccess(AuthResult authResult) {
+                                 Toast.makeText(RegisterActivity.this, "User crée avec succès", Toast.LENGTH_SHORT).show();
                             }
                         })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(RegisterActivity.this, "Echec d'ajout!!!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 
