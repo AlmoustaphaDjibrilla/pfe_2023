@@ -137,8 +137,13 @@ public class LoginActivity extends Activity {
                             Toast.makeText(LoginActivity.this, "Consultez votre messagerie électronique", Toast.LENGTH_LONG).show();
                             Intent intentOuvrirGmail= getPackageManager()
                                     .getLaunchIntentForPackage("com.google.android.gm");
-                            if (intentOuvrirGmail !=null){
-                                startActivity(intentOuvrirGmail);
+                            Intent mailClient = new Intent(Intent.ACTION_VIEW);
+                            mailClient.setClassName("com.google.android.gm", "com.google.android.gm.ConversationListActivityGmail");
+
+
+                            if (mailClient !=null){
+//                                startActivity(intentOuvrirGmail);
+                                startActivity(mailClient);
                             }
                         }
                     })
