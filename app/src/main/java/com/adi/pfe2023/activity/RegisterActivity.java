@@ -40,7 +40,6 @@ public class RegisterActivity extends Activity {
 
         //Initialisation Firebase Auth
         mAuth= FirebaseAuth.getInstance();
-
         //Create a new User
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
