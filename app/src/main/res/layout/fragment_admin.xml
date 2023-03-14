@@ -9,15 +9,16 @@
         android:id="@+id/txtTitre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Login Admin"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07999998" />
+        app:layout_constraintVertical_bias="0.077" />
 
     <EditText
         android:id="@+id/txtMailLoginAdmin"
@@ -78,34 +79,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/txtPasswordLoginAdmin"
         app:layout_constraintTop_toBottomOf="@+id/txtPasswordOublieAdmin" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/btnLoginAdmin"
-        app:layout_constraintStart_toStartOf="@+id/btnLoginAdmin"
-        app:layout_constraintTop_toBottomOf="@+id/btnLoginAdmin">
-
-        <TextView
-            android:id="@+id/txtPasDeCompte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Vous n'avez pas de compte?"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/txtCreerCompte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Créez un"
-            android:textAlignment="center"
-            android:textColor="@color/purple_700" />
-    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

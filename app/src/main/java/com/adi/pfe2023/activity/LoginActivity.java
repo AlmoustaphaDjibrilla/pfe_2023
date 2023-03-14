@@ -17,10 +17,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends Activity {
 
     private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
 
     TextView txtCreerCompte, txtPasswordOublie;
     EditText txtMailLogin, txtPasswordLogin;
@@ -36,6 +38,7 @@ public class LoginActivity extends Activity {
 
         //Initialisation Firebase Auth
         mAuth= FirebaseAuth.getInstance();
+
 
 
         /**
@@ -62,6 +65,7 @@ public class LoginActivity extends Activity {
                         String password= txtPasswordLogin.getText().toString();
 
                         loginMethod(mail, password);
+
                     }
                 }
         );
@@ -88,12 +92,14 @@ public class LoginActivity extends Activity {
      */
     private void init(){
 
-        txtCreerCompte= findViewById(R.id.txtCreerCompte);
-        btnLogin= findViewById(R.id.btnLogin);
-        txtPasswordOublie= findViewById(R.id.txtPasswordOublie);
 
-        txtMailLogin=findViewById(R.id.txtMailLogin);
-        txtPasswordLogin= findViewById(R.id.txtPasswordLogin);
+
+        txtCreerCompte= findViewById(R.id.txtCreerCompte);
+        btnLogin= findViewById(R.id.btnLoginAdmin);
+        txtPasswordOublie= findViewById(R.id.txtPasswordOublieAdmin);
+
+        txtMailLogin=findViewById(R.id.txtMailLoginAdmin);
+        txtPasswordLogin= findViewById(R.id.txtPasswordLoginAdmin);
     }
 
 
@@ -115,6 +121,15 @@ public class LoginActivity extends Activity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(LoginActivity.this, "Authentification réussi", Toast.LENGTH_SHORT).show();
+                            firebaseUser= mAuth.getCurrentUser();
+                            ouvrirMainPage();
+//                            System.out.println("Mail: "+firebaseUser.getEmail()+
+//                                    "\nId: "+firebaseUser.getUid()+
+//                                    "\nTel: "+firebaseUser.getPhoneNumber()+
+//                                    "\nProvider Id: "+firebaseUser.getProviderId()+
+//                                    "\nName "+firebaseUser.getDisplayName()+
+//                                    "\nPhoto Uri: "+firebaseUser.getPhotoUrl()+
+//                                    "\nConnecté ? "+firebaseUser.isEmailVerified());
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -125,9 +140,17 @@ public class LoginActivity extends Activity {
                     });
         }
     }
+
+
+    /**
+     * envoyer un mail pour pouvoir réinitialiser le mot de passe
+     * du user ayant le mail spécifié
+     * @param mail
+     */
     private void resetPasswordMethod(String mail){
         if (mail==null || mail.equals("")){
             Toast.makeText(LoginActivity.this, "Veuillez saisir votre mail...", Toast.LENGTH_SHORT).show();
+            txtMailLogin.setError("Erreur");
         }
         else {
             mAuth.sendPasswordResetEmail(mail)
@@ -135,14 +158,9 @@ public class LoginActivity extends Activity {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(LoginActivity.this, "Consultez votre messagerie électronique", Toast.LENGTH_LONG).show();
-                            Intent intentOuvrirGmail= getPackageManager()
-                                    .getLaunchIntentForPackage("com.google.android.gm");
                             Intent mailClient = new Intent(Intent.ACTION_VIEW);
                             mailClient.setClassName("com.google.android.gm", "com.google.android.gm.ConversationListActivityGmail");
-
-
                             if (mailClient !=null){
-//                                startActivity(intentOuvrirGmail);
                                 startActivity(mailClient);
                             }
                         }
@@ -154,5 +172,11 @@ public class LoginActivity extends Activity {
                         }
                     });
         }
+    }
+
+    public void ouvrirMainPage(){
+        Intent ouvrirMainPage= new Intent(LoginActivity.this, MainPageActivity.class);
+        startActivity(ouvrirMainPage);
+        finish();
     }
 }

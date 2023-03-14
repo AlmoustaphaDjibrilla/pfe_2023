@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.adi.pfe2023"
         minSdk 26
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -28,6 +28,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+
+    buildFeatures{
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -41,6 +45,10 @@ dependencies {
     // Add the dependency for the firebase Authentification library
     // When using the BoM, you don't specify versions in firebase library dependencies
     implementation 'com.google.firebase:firebase-auth'
+
+    // Add dependency of Firebase Admin
+    //implementation 'com.google.firebase:firebase-admin:9.1.1'
+
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-firestore:24.1.1'

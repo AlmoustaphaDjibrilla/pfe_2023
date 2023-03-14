@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,6 +39,7 @@ public class RegisterActivity extends Activity {
         //initialiser les elements
         init();
 
+
         //Initialisation Firebase Auth
         mAuth= FirebaseAuth.getInstance();
         //Create a new User
@@ -48,22 +50,9 @@ public class RegisterActivity extends Activity {
                 String mail= txtMail.getText().toString();
                 String password= txtPassword1.getText().toString();
 
-                mAuth.createUserWithEmailAndPassword(mail, password)
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                 Toast.makeText(RegisterActivity.this, "User crée avec succès", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(RegisterActivity.this, "Echec d'ajout!!!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                createUserWithEmailAndPassword(mail, password);
             }
         });
-
 
     }
 
@@ -75,6 +64,34 @@ public class RegisterActivity extends Activity {
         txtPassword2= findViewById(R.id.txtPassword2);
 
         btnSave= findViewById(R.id.btnSave);
+    }
+
+
+    /**
+     * Ajouter un nouvel utilisateur
+     * @param mail
+     * @param password
+     */
+    private void createUserWithEmailAndPassword(String mail, String password){
+        if (mail==null || mail.equals("") || password==null || password.equals("")){
+            Toast.makeText(RegisterActivity.this, "Veuillez saisir tous les champs", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mAuth.createUserWithEmailAndPassword(mail, password)
+                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            Toast.makeText(RegisterActivity.this, "User crée avec succès", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, "Echec d'ajout!!!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+        }
     }
 
 
