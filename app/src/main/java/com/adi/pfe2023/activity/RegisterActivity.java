@@ -93,6 +93,7 @@ public class RegisterActivity extends Activity {
                             FirebaseUser firebaseUser= mAuth.getCurrentUser();
                             UserModel userModel= new UserModel(mail, nom);
                             ajoutUserDataBase(firebaseUser, userModel);
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

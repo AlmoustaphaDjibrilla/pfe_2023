@@ -18,10 +18,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends Activity {
 
+    private final String PATH_USER_DATABASE= "Users";
+
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firebaseFirestore;
     private FirebaseUser firebaseUser;
 
     TextView txtCreerCompte, txtPasswordOublie;
@@ -36,8 +42,6 @@ public class LoginActivity extends Activity {
         //initialisation des différents composants de l'interface graphique
         init();
 
-        //Initialisation Firebase Auth
-        mAuth= FirebaseAuth.getInstance();
 
 
 
@@ -91,8 +95,10 @@ public class LoginActivity extends Activity {
      * Initialisation des différents composants de l'interface graphique
      */
     private void init(){
+        //Initialisation Firebase Auth
+        mAuth= FirebaseAuth.getInstance();
 
-
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         txtCreerCompte= findViewById(R.id.txtCreerCompte);
         btnLogin= findViewById(R.id.btnLoginAdmin);
@@ -120,22 +126,16 @@ public class LoginActivity extends Activity {
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(LoginActivity.this, "Authentification réussi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Authentification réussi", Toast.LENGTH_SHORT).show();
                             firebaseUser= mAuth.getCurrentUser();
+                            getUserModelFromFirebase(firebaseUser);
                             ouvrirMainPage();
-//                            System.out.println("Mail: "+firebaseUser.getEmail()+
-//                                    "\nId: "+firebaseUser.getUid()+
-//                                    "\nTel: "+firebaseUser.getPhoneNumber()+
-//                                    "\nProvider Id: "+firebaseUser.getProviderId()+
-//                                    "\nName "+firebaseUser.getDisplayName()+
-//                                    "\nPhoto Uri: "+firebaseUser.getPhotoUrl()+
-//                                    "\nConnecté ? "+firebaseUser.isEmailVerified());
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, "Données non correspondants", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Données non correspondants", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -149,7 +149,7 @@ public class LoginActivity extends Activity {
      */
     private void resetPasswordMethod(String mail){
         if (mail==null || mail.equals("")){
-            Toast.makeText(LoginActivity.this, "Veuillez saisir votre mail...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Veuillez saisir votre mail...", Toast.LENGTH_SHORT).show();
             txtMailLogin.setError("Erreur");
         }
         else {
@@ -157,7 +157,7 @@ public class LoginActivity extends Activity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(LoginActivity.this, "Consultez votre messagerie électronique", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Consultez votre messagerie électronique", Toast.LENGTH_LONG).show();
                             Intent mailClient = new Intent(Intent.ACTION_VIEW);
                             mailClient.setClassName("com.google.android.gm", "com.google.android.gm.ConversationListActivityGmail");
                             if (mailClient !=null){
@@ -168,15 +168,45 @@ public class LoginActivity extends Activity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, "Echec d'envoi de mail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Echec d'envoi de mail", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
     }
 
     public void ouvrirMainPage(){
-        Intent ouvrirMainPage= new Intent(LoginActivity.this, MainPageActivity.class);
+        Intent ouvrirMainPage= new Intent(getApplicationContext(), MainPageActivity.class);
         startActivity(ouvrirMainPage);
         finish();
+    }
+
+
+    private void getUserModelFromFirebase(FirebaseUser firebaseUser){
+        DocumentReference doc=
+                firebaseFirestore.collection(PATH_USER_DATABASE)
+                        .document(firebaseUser.getUid());
+
+        UserModel userModel=null;
+
+
+        doc.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.getBoolean("admin")){
+                          Toast.makeText(getApplicationContext(), "Administrateur", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "User", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Doc non trouvé", Toast.LENGTH_LONG).show();
+
+                    }
+                });
     }
 }
