@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.adi.pfe2023.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,10 +23,15 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends Activity {
 
+    final String PATH_USER_DATABASE= "Users";
+
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firebaseFirestore;
     TextView txtEnregistre, txtNom, txtMail, txtPassword1, txtPassword2;
     Button btnSave;
 
@@ -39,9 +45,6 @@ public class RegisterActivity extends Activity {
         //initialiser les elements
         init();
 
-
-        //Initialisation Firebase Auth
-        mAuth= FirebaseAuth.getInstance();
         //Create a new User
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +53,7 @@ public class RegisterActivity extends Activity {
                 String mail= txtMail.getText().toString();
                 String password= txtPassword1.getText().toString();
 
-                createUserWithEmailAndPassword(mail, password);
+                createUserWithEmailAndPassword(mail, password, nom);
             }
         });
 
@@ -64,6 +67,10 @@ public class RegisterActivity extends Activity {
         txtPassword2= findViewById(R.id.txtPassword2);
 
         btnSave= findViewById(R.id.btnSave);
+
+        //Initialisation Firebase Auth
+        mAuth= FirebaseAuth.getInstance();
+        firebaseFirestore= FirebaseFirestore.getInstance();
     }
 
 
@@ -72,7 +79,7 @@ public class RegisterActivity extends Activity {
      * @param mail
      * @param password
      */
-    private void createUserWithEmailAndPassword(String mail, String password){
+    private void createUserWithEmailAndPassword(String mail, String password, @Nullable String nom){
         if (mail==null || mail.equals("") || password==null || password.equals("")){
             Toast.makeText(RegisterActivity.this, "Veuillez saisir tous les champs", Toast.LENGTH_SHORT).show();
         }
@@ -82,6 +89,10 @@ public class RegisterActivity extends Activity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(RegisterActivity.this, "User crée avec succès", Toast.LENGTH_SHORT).show();
+
+                            FirebaseUser firebaseUser= mAuth.getCurrentUser();
+                            UserModel userModel= new UserModel(mail, nom);
+                            ajoutUserDataBase(firebaseUser, userModel);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -92,6 +103,23 @@ public class RegisterActivity extends Activity {
                     });
 
         }
+    }
+
+
+    /**
+     * En plus de l'enregistrement
+     * ajouter le nouvel user
+     * dans une base de données
+     * pour faciliter les traffics
+     * @param firebaseUser
+     * @param userModel
+     */
+    private void ajoutUserDataBase(FirebaseUser firebaseUser, UserModel userModel){
+        DocumentReference documentReference=
+                firebaseFirestore.collection(PATH_USER_DATABASE)
+                        .document(firebaseUser.getUid());
+        userModel.setUid(firebaseUser.getUid());
+        documentReference.set(userModel);
     }
 
 
