@@ -1,6 +1,7 @@
 package com.adi.pfe2023.activity.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import com.adi.pfe2023.R;
 import com.adi.pfe2023.activity.RegisterActivity;
 
 public class AdminMainActivity extends AppCompatActivity {
-    Button btnAddUser;
+    CardView cardAddUser, cardSearchUser, cardDeleteUser, cardListAllUsers, cardHistoriqueCommande, cardLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +19,15 @@ public class AdminMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_main);
         init();
 
-        btnAddUser.setOnClickListener(
+        cardAddUser.setOnClickListener(
                 v->{
                     addNewUser();
+                }
+        );
+
+        cardLogout.setOnClickListener(
+                v->{
+                    finish();
                 }
         );
     }
@@ -32,6 +39,11 @@ public class AdminMainActivity extends AppCompatActivity {
 
 
     private void init(){
-        btnAddUser= findViewById(R.id.btnAddUser);
+        cardAddUser= findViewById(R.id.cardAddUser);
+        cardSearchUser= findViewById(R.id.cardSearchUser);
+        cardDeleteUser= findViewById(R.id.cardDeleteUser);
+        cardListAllUsers= findViewById(R.id.cardListAllUsers);
+        cardHistoriqueCommande= findViewById(R.id.cardHistoriqueCommande);
+        cardLogout= findViewById(R.id.cardLogout);
     }
 }

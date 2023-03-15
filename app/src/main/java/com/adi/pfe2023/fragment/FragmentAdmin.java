@@ -142,10 +142,12 @@ public class FragmentAdmin extends Fragment {
                         .document(firebaseUser.getUid());
 
 
+
         doc.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+
                         if (documentSnapshot.getBoolean("admin")){
                             Toast.makeText(getContext(), "Bienvenue à l'interface ADMINISTRATEUR...", Toast.LENGTH_LONG).show();
                             Intent intentAdminMainPage= new Intent(getContext(), AdminMainActivity.class);
