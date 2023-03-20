@@ -23,6 +23,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.AggregateQuery;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,6 +34,8 @@ public class RegisterActivity extends Activity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
+    private CollectionReference collectionUsers;
+
     TextView txtEnregistre, txtNom, txtMail, txtPassword1, txtPassword2;
     Button btnSave;
 
@@ -71,6 +75,7 @@ public class RegisterActivity extends Activity {
         //Initialisation Firebase Auth
         mAuth= FirebaseAuth.getInstance();
         firebaseFirestore= FirebaseFirestore.getInstance();
+        collectionUsers= firebaseFirestore.collection(PATH_USER_DATABASE);
     }
 
 
@@ -102,7 +107,6 @@ public class RegisterActivity extends Activity {
                             Toast.makeText(RegisterActivity.this, "Echec d'ajout!!!", Toast.LENGTH_SHORT).show();
                         }
                     });
-
         }
     }
 
@@ -117,10 +121,11 @@ public class RegisterActivity extends Activity {
      */
     private void ajoutUserDataBase(FirebaseUser firebaseUser, UserModel userModel){
         DocumentReference documentReference=
-                firebaseFirestore.collection(PATH_USER_DATABASE)
+                collectionUsers
                         .document(firebaseUser.getUid());
         userModel.setUid(firebaseUser.getUid());
         documentReference.set(userModel);
+
     }
 
 

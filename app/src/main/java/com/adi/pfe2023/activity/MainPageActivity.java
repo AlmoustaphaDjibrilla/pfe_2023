@@ -15,9 +15,11 @@ import com.adi.pfe2023.fragment.FragmentAdmin;
 import com.adi.pfe2023.fragment.FragmentHome;
 import com.adi.pfe2023.fragment.FragmentProfile;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DatabaseReference;
 
 public class MainPageActivity extends AppCompatActivity {
 
+    DatabaseReference ref;
     ActivityMainPageBinding binding;
 
     @Override

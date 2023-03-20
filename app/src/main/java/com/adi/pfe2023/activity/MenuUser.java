@@ -53,7 +53,7 @@ public class MenuUser extends AppCompatActivity {
         btnHum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("test/humidite");
+                ref = FirebaseDatabase.getInstance().getReference().child("test/humidite");
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
