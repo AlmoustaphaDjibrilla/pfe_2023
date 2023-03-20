@@ -22,7 +22,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class LoginActivity extends Activity {
+import java.io.Serializable;
+
+public class LoginActivity extends Activity implements Serializable {
 
     private final String PATH_USER_DATABASE= "Users";
 
@@ -176,6 +178,7 @@ public class LoginActivity extends Activity {
 
     public void ouvrirMainPage(){
         Intent ouvrirMainPage= new Intent(getApplicationContext(), MainPageActivity.class);
+        ouvrirMainPage.putExtra("fireBaseUser", firebaseUser);
         startActivity(ouvrirMainPage);
         finish();
     }
