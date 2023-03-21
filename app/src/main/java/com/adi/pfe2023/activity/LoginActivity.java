@@ -174,9 +174,6 @@ public class LoginActivity extends Activity implements Serializable {
                 firebaseFirestore.collection(PATH_USER_DATABASE)
                         .document(firebaseUser.getUid());
 
-        UserModel userModel=null;
-
-
         doc.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
