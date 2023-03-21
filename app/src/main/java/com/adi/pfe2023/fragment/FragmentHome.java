@@ -37,7 +37,7 @@ public class FragmentHome extends Fragment {
     private FirebaseUser currentUser;
 
     DatabaseReference databaseReference;
-    Button btnTemp, btnHum, btnAllumerAmpouleSalon, btnEteindreAmpouleSalon, btnAllumerAmpouleCuisine, btnEteindreAmpouleCuisine;
+    Button btnAllumerAmpouleSalon, btnEteindreAmpouleSalon, btnAllumerAmpouleCuisine, btnEteindreAmpouleCuisine;
     TextView tempText, humText;
 
 
@@ -94,9 +94,7 @@ public class FragmentHome extends Fragment {
      *              fourni par le fragment en cours
      */
     private void init(View view){
-        btnTemp = view.findViewById(R.id.btnTemp);
         tempText = view.findViewById(R.id.temp);
-        btnHum = view.findViewById(R.id.btnHum);
         humText = view.findViewById(R.id.hum);
 
         btnAllumerAmpouleSalon = view.findViewById(R.id.btnAllumer);
@@ -126,7 +124,6 @@ public class FragmentHome extends Fragment {
                         databaseReference.setValue("ON");
                     } else if (value.equals("ON")) {
                         Toast.makeText(getContext(), "La lampe est deja allumée", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(), currentUser.toString(), Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getContext(), "Nous avons rencontré un probleme", Toast.LENGTH_SHORT).show();
                     }

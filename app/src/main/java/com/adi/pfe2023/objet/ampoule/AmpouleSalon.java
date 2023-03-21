@@ -8,10 +8,6 @@ public class AmpouleSalon extends Ampoule{
         this.setCheminAmpoule(cheminAmpouleSalon);
     }
 
-    @Override
-    public void setCheminAmpoule(String f){
-
-    }
 
 
 

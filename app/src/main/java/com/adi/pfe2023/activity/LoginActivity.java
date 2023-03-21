@@ -46,8 +46,6 @@ public class LoginActivity extends Activity implements Serializable {
 
 
 
-
-
         /**
          * Click sur le button login pour se connecter
          */

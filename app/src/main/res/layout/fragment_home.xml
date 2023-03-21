@@ -7,67 +7,42 @@
     tools:context=".activity.MenuUser"
     tools:ignore="ExtraText">
 
-    <Button
-        android:id="@+id/btnHum"
-        android:layout_width="139dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="44dp"
-        android:background="@color/colorPurple"
-        android:text="Humidite"
-        android:textColor="@color/colorWithe"
-        app:layout_constraintEnd_toEndOf="@+id/temp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnTemp"
-        app:layout_constraintTop_toBottomOf="@+id/btnTemp" />
-
     <TextView
         android:id="@+id/hum"
         android:layout_width="204dp"
         android:layout_height="43dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="48dp"
         android:text="..."
         android:textAlignment="center"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/btnHum"
-        app:layout_constraintTop_toTopOf="@+id/btnHum" />
-
-    <Button
-        android:id="@+id/btnTemp"
-        android:layout_width="138dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPurple"
-        android:text="Temperature"
-        android:textColor="@color/colorWithe"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/temp"
+        app:layout_constraintStart_toStartOf="@+id/temp"
+        app:layout_constraintTop_toBottomOf="@+id/temp" />
 
     <TextView
         android:id="@+id/temp"
         android:layout_width="195dp"
         android:layout_height="38dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:text="..."
         android:textAlignment="center"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/btnTemp"
-        app:layout_constraintTop_toTopOf="@+id/btnTemp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="387dp"
         android:layout_height="95dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="110dp"
         android:gravity="center|center_horizontal|center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.42"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHum">
+        app:layout_constraintTop_toBottomOf="@+id/hum">
 
         <LinearLayout
             android:layout_width="match_parent"
