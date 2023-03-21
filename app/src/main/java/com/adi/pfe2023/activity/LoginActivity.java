@@ -47,18 +47,6 @@ public class LoginActivity extends Activity implements Serializable {
 
 
 
-        /**
-         * Click sur le lien pour creer un nouveau compte
-         */
-        txtCreerCompte.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent createAccount= new Intent(LoginActivity.this, RegisterActivity.class);
-                        startActivity(createAccount);
-                    }
-                }
-        );
 
         /**
          * Click sur le button login pour se connecter
@@ -102,7 +90,6 @@ public class LoginActivity extends Activity implements Serializable {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        txtCreerCompte= findViewById(R.id.txtCreerCompte);
         btnLogin= findViewById(R.id.btnLoginAdmin);
         txtPasswordOublie= findViewById(R.id.txtPasswordOublieAdmin);
 
