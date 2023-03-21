@@ -6,6 +6,7 @@ public class AmpouleSalon extends Ampoule{
     public AmpouleSalon(){
         super();
         this.setCheminAmpoule(cheminAmpouleSalon);
+        this.setNomComposant("Ampoule Salon");
     }
 
 

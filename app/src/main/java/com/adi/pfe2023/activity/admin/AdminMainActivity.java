@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.adi.pfe2023.R;
 import com.adi.pfe2023.activity.RegisterActivity;
 import com.adi.pfe2023.activity.admin.activity.ChercherUser;
+import com.adi.pfe2023.activity.admin.activity.RechercheUserActivity;
 
 public class AdminMainActivity extends AppCompatActivity {
     CardView cardAddUser, cardSearchUser, cardDeleteUser, cardListAllUsers, cardHistoriqueCommande, cardLogout;
@@ -28,7 +29,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
         cardSearchUser.setOnClickListener(
                 v->{
-                    Intent intentChercherUser= new Intent(getApplicationContext(), ChercherUser.class);
+                    Intent intentChercherUser= new Intent(getApplicationContext(), RechercheUserActivity.class);
                     startActivity(intentChercherUser);
                 }
         );

@@ -124,6 +124,7 @@ public class FragmentHome extends Fragment {
                         databaseReference.setValue("ON");
                     } else if (value.equals("ON")) {
                         Toast.makeText(getContext(), "La lampe est deja allumée", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getContext(), "Nous avons rencontré un probleme", Toast.LENGTH_SHORT).show();
                     }
