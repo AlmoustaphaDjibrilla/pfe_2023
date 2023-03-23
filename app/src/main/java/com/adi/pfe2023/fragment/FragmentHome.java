@@ -16,6 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adi.pfe2023.R;
+import com.adi.pfe2023.action.Commande;
+import com.adi.pfe2023.model.UserModel;
+import com.adi.pfe2023.objet.Composant;
 import com.adi.pfe2023.objet.ampoule.Ampoule;
 import com.adi.pfe2023.objet.ampoule.AmpouleCuisine;
 import com.adi.pfe2023.objet.ampoule.AmpouleSalon;
@@ -27,12 +30,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FragmentHome extends Fragment {
 
-    final String PATH_TEMPERATURE= "temperature";
-    final String PATH_LED_SALON="led_salon";
-    final String PATH_LED_CUISINE= "led_cuisine";
+    private final String detail_allumer_ampoule= "Allumage";
+    private final String detail_extinction_ampoule= "Extinction";
+    final String PATH_COMMANDE= "Commandes";
+    private final String PATH_USER_DATABASE= "Users";
+
 
     private FirebaseUser currentUser;
 
@@ -66,19 +76,24 @@ public class FragmentHome extends Fragment {
         lireTemperatureEtHumidite(new Meteo());
 
         btnAllumerAmpouleSalon.setOnClickListener(
-                v-> allumer(new AmpouleSalon())
+                v-> {
+                    allumer(AmpouleSalon.getInstance());
+                }
+
         );
 
         btnEteindreAmpouleSalon.setOnClickListener(
-                v-> eteindre(new AmpouleSalon())
+                v-> {
+                    eteindre(AmpouleSalon.getInstance());
+                }
         );
 
         btnAllumerAmpouleCuisine.setOnClickListener(
-                v->allumer(new AmpouleCuisine())
+                v->allumer(AmpouleCuisine.getInstance())
         );
 
         btnEteindreAmpouleCuisine.setOnClickListener(
-                v->eteindre(new AmpouleCuisine())
+                v->eteindre(AmpouleCuisine.getInstance())
         );
 
 
@@ -122,9 +137,9 @@ public class FragmentHome extends Fragment {
                 if (value!=null) {
                     if (value.equals("OFF")) {
                         databaseReference.setValue("ON");
+                        enregistrerNouvelleCommande(detail_allumer_ampoule, ampoule);
                     } else if (value.equals("ON")) {
                         Toast.makeText(getContext(), "La lampe est deja allumée", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getContext(), "Nous avons rencontré un probleme", Toast.LENGTH_SHORT).show();
                     }
@@ -154,6 +169,7 @@ public class FragmentHome extends Fragment {
                 if (value!=null) {
                     if (value.equals("ON")) {
                         databaseReference.setValue("OFF");
+                        enregistrerNouvelleCommande(detail_extinction_ampoule, ampoule);
                     } else if (value.equals("OFF")) {
                         Toast.makeText(getContext(), "La lampe est deja éteinte", Toast.LENGTH_SHORT).show();
                     } else {
@@ -214,6 +230,38 @@ public class FragmentHome extends Fragment {
                     }
                 }
         );
+    }
+
+    private void enregistrerNouvelleCommande(Commande commande){
+        DocumentReference documentReference=
+                FirebaseFirestore.getInstance()
+                        .collection(PATH_COMMANDE)
+                        .document();
+        documentReference.set(commande);
+    }
+
+    private void enregistrerNouvelleCommande(String detailCommande, Composant composant){
+
+        DocumentReference docRef= FirebaseFirestore.getInstance()
+                .collection(PATH_USER_DATABASE)
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        docRef.get()
+                .addOnSuccessListener(
+                        documentSnapshot -> {
+                            Commande commande= new Commande(composant);
+                            UserModel userModel= documentSnapshot.toObject(UserModel.class);
+                            commande.setDetail_commande(detailCommande);
+                            commande.setUserModel(userModel);
+                            commande.setEmailUser(userModel.getEmail());
+
+                            DocumentReference dfReferenceSaveCommande=
+                                    FirebaseFirestore.getInstance()
+                                            .collection(PATH_COMMANDE)
+                                            .document();
+                            dfReferenceSaveCommande.set(commande);
+                        }
+                );
     }
 
 }

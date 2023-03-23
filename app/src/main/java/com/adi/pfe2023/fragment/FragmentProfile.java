@@ -1,5 +1,6 @@
 package com.adi.pfe2023.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,17 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adi.pfe2023.R;
+import com.adi.pfe2023.activity.CommandesUserActivity;
+import com.adi.pfe2023.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class FragmentProfile extends Fragment {
 
-    FirebaseUser currentUser;
+    private final String PATH_USER_DATABASE= "Users";
+
+    FirebaseUser firebaseUser;
+    UserModel userModel;
 
     TextView txtNomUser1, txtNomUser2, txtMailUser1, txtMailUser2, txtDateEnregistrementUser;
     ImageView imgProfilUser, imgHistoriqueUser;
@@ -46,7 +56,19 @@ public class FragmentProfile extends Fragment {
 
         init(view);
 
-        updateComponants();
+        getUserModel(firebaseUser);
+        UserModel modelUser= getUserModel();
+
+        if (modelUser!=null) {
+            updateComponants(modelUser);
+        }
+
+        imgHistoriqueUser.setOnClickListener(
+                v->{
+                    Intent intentHistorique= new Intent(getContext(), CommandesUserActivity.class);
+                    startActivity(intentHistorique);
+                }
+        );
 
         return view;
     }
@@ -57,12 +79,12 @@ public class FragmentProfile extends Fragment {
      * graphiques de ce fragment
      */
     private void init(View view){
-        currentUser= FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         txtNomUser1= view.findViewById(R.id.txtNomUser1);
         txtNomUser2= view.findViewById(R.id.txtNomUser2);
 
-        txtMailUser1= view.findViewById(R.id.txtNomUser1);
+        txtMailUser1= view.findViewById(R.id.txtMailUser1);
         txtMailUser2= view.findViewById(R.id.txtMailUser2);
 
         txtDateEnregistrementUser= view.findViewById(R.id.txtDateEnregistrementUser);
@@ -74,19 +96,46 @@ public class FragmentProfile extends Fragment {
     }
 
 
-    private void updateComponants(){
-        if (this.currentUser!=null){
-            if (currentUser.getPhotoUrl()!=null && !currentUser.getPhotoUrl().equals("")){
-                imgProfilUser.setImageURI(currentUser.getPhotoUrl());
+    private void updateComponants(UserModel userModel){
+        if (userModel !=null){
+            if (userModel.getEmail()!=null && !userModel.equals("")){
+                txtMailUser1.setText(userModel.getEmail());
+                txtMailUser2.setText(userModel.getEmail());
             }
-            if (currentUser.getEmail()!= null && !currentUser.getEmail().equals("")){
-                txtMailUser1.setText(currentUser.getEmail());
-                txtMailUser2.setText(currentUser.getEmail());
+            if (userModel.getNom() !=null && !userModel.equals("")){
+                txtNomUser1.setText(userModel.getNom());
+                txtNomUser2.setText(userModel.getNom());
             }
-            if (currentUser.getDisplayName()!=null && !currentUser.getDisplayName().equals("")){
-                txtNomUser1.setText(currentUser.getDisplayName());
-                txtNomUser2.setText(currentUser.getDisplayName());
+            if (userModel.getDateEnregistrement() != null  && !userModel.getDateEnregistrement().equals("")){
+                txtDateEnregistrementUser.setText(userModel.getDateEnregistrement());
             }
         }
+    }
+
+
+    private void getUserModel(FirebaseUser firebaseUser){
+        String userId= firebaseUser.getUid();
+        if (userId!=null && !userId.equals("")){
+            DocumentReference documentReference=
+                    FirebaseFirestore.getInstance()
+                            .collection(PATH_USER_DATABASE)
+                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            documentReference.get()
+                    .addOnSuccessListener(
+                            documentSnapshot->{
+                                UserModel modelUser= documentSnapshot.toObject(UserModel.class);
+                                setUserModel(modelUser);
+                                updateComponants(userModel);
+                            }
+                    );
+        }
+    }
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
     }
 }

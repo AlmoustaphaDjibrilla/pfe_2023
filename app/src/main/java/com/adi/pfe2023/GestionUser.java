@@ -1,18 +1,6 @@
 package com.adi.pfe2023;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
-import com.adi.pfe2023.activity.LoginActivity;
-import com.adi.pfe2023.activity.UserModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
+import com.adi.pfe2023.model.UserModel;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 

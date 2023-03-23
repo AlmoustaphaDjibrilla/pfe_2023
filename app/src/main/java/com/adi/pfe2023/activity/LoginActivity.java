@@ -113,7 +113,6 @@ public class LoginActivity extends Activity implements Serializable {
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(getApplicationContext(), "Authentification réussi", Toast.LENGTH_SHORT).show();
                             firebaseUser= mAuth.getCurrentUser();
                             getUserModelFromFirebase(firebaseUser);
                             ouvrirMainPage();
@@ -179,10 +178,10 @@ public class LoginActivity extends Activity implements Serializable {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.getBoolean("admin")){
-                          Toast.makeText(getApplicationContext(), "Administrateur", Toast.LENGTH_LONG).show();
+                          Toast.makeText(getApplicationContext(), "Administrateur", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "User", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "User", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })

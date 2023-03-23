@@ -1,11 +1,8 @@
 package com.adi.pfe2023.activity;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.app.Activity;
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,15 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.adi.pfe2023.R;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.adi.pfe2023.model.UserModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.AggregateQuery;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,8 +29,9 @@ public class RegisterActivity extends Activity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
     private CollectionReference collectionUsers;
+    private UserModel userModel;
 
-    TextView txtEnregistre, txtNom, txtMail, txtPassword1, txtPassword2;
+    TextView txtEnregistre, txtNom, txtMail, txtPassword1, txtTelephone;
     Button btnSave;
 
 
@@ -56,8 +51,9 @@ public class RegisterActivity extends Activity {
                 String nom= txtNom.getText().toString();
                 String mail= txtMail.getText().toString();
                 String password= txtPassword1.getText().toString();
+                String telephone= txtTelephone.getText().toString();
 
-                createUserWithEmailAndPassword(mail, password, nom);
+                createUserWithEmailAndPassword(mail, password, nom, telephone);
             }
         });
 
@@ -68,7 +64,7 @@ public class RegisterActivity extends Activity {
         txtNom= findViewById(R.id.txtNom);
         txtMail= findViewById(R.id.txtMail);
         txtPassword1= findViewById(R.id.txtPassword1);
-        txtPassword2= findViewById(R.id.txtPassword2);
+        txtTelephone = findViewById(R.id.txtTelephoneUserRegister);
 
         btnSave= findViewById(R.id.btnSave);
 
@@ -84,7 +80,7 @@ public class RegisterActivity extends Activity {
      * @param mail
      * @param password
      */
-    private void createUserWithEmailAndPassword(String mail, String password, @Nullable String nom){
+    private void createUserWithEmailAndPassword(String mail, String password, @Nullable String nom, @Nullable String telephone){
         if (mail==null || mail.equals("") || password==null || password.equals("")){
             Toast.makeText(RegisterActivity.this, "Veuillez saisir tous les champs", Toast.LENGTH_SHORT).show();
         }
@@ -96,7 +92,8 @@ public class RegisterActivity extends Activity {
                             Toast.makeText(RegisterActivity.this, "User crée avec succès", Toast.LENGTH_SHORT).show();
 
                             FirebaseUser firebaseUser= mAuth.getCurrentUser();
-                            UserModel userModel= new UserModel(mail, nom);
+                            UserModel userModel= new UserModel(firebaseUser.getUid(), telephone, mail, nom, password);
+                            setUserModel(userModel);
                             ajoutUserDataBase(firebaseUser, userModel);
                             finish();
                         }
@@ -125,8 +122,13 @@ public class RegisterActivity extends Activity {
                         .document(firebaseUser.getUid());
         userModel.setUid(firebaseUser.getUid());
         documentReference.set(userModel);
-
     }
 
+    public UserModel getUserModel() {
+        return userModel;
+    }
 
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
 }

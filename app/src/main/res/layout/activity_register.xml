@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtMail" />
 
     <EditText
-        android:id="@+id/txtPassword2"
+        android:id="@+id/txtTelephoneUserRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -87,8 +87,8 @@
         android:drawableLeft="@drawable/ic_security"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="********"
-        android:inputType="textPassword"
+        android:hint="telephone"
+        android:inputType="number"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
@@ -104,9 +104,9 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/bouton_background"
         android:text="Save"
-        app:layout_constraintEnd_toEndOf="@+id/txtPassword2"
-        app:layout_constraintStart_toStartOf="@+id/txtPassword2"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword2" />
+        app:layout_constraintEnd_toEndOf="@+id/txtTelephoneUserRegister"
+        app:layout_constraintStart_toStartOf="@+id/txtTelephoneUserRegister"
+        app:layout_constraintTop_toBottomOf="@+id/txtTelephoneUserRegister" />
 
     <TextView
         android:id="@+id/txtEnregistre"
