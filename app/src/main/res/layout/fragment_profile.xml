@@ -71,8 +71,8 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_width="355dp"
+                    android:layout_height="339dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="280dp"
                     android:layout_marginEnd="24dp"
@@ -217,15 +217,19 @@
 
                     <Button
                         android:id="@+id/btnEditerProfilUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="242dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/buttonshape"
                         android:fontFamily="@font/calibri"
                         android:text="Editer mon profil"
                         android:textAllCaps="false"
                         android:textColor="#ffffff"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

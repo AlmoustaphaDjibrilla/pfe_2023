@@ -34,7 +34,7 @@ public class ChercherUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chercher_user);
+        setContentView(R.layout.activity_recherche_user);
 
         init();
 
@@ -49,7 +49,7 @@ public class ChercherUser extends AppCompatActivity {
 
     private void init(){
         txtMailSearchUser= findViewById(R.id.txtMailSearchUser);
-        txtResult= findViewById(R.id.txtResult);
+        //txtResult= findViewById(R.id.txtResult);
         btnSearchUser= findViewById(R.id.btnSearchUser);
 
         firebaseAuth= FirebaseAuth.getInstance();

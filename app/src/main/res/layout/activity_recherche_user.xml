@@ -113,6 +113,7 @@
                             android:textColorHint="#FF8A99AF">
 
                             <EditText
+                                android:id="@+id/txtMailSearchUser"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:drawableStart="@drawable/ic_email"
@@ -169,7 +170,7 @@
 
 
                 <Button
-                    android:id="@+id/search_buses"
+                    android:id="@+id/btnSearchUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

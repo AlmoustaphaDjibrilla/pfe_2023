@@ -66,12 +66,13 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        this.currentUser= FirebaseAuth.getInstance().getCurrentUser();
-
         View view= inflater.inflate(R.layout.fragment_home, container, false);
 
         init(view);
+
+        /*
+        this.currentUser= FirebaseAuth.getInstance().getCurrentUser();
+
 
         lireTemperatureEtHumidite(new Meteo());
 
@@ -96,7 +97,7 @@ public class FragmentHome extends Fragment {
                 v->eteindre(AmpouleCuisine.getInstance())
         );
 
-
+        */
         return view;
     }
 
@@ -109,6 +110,7 @@ public class FragmentHome extends Fragment {
      *              fourni par le fragment en cours
      */
     private void init(View view){
+        /*
         tempText = view.findViewById(R.id.temp);
         humText = view.findViewById(R.id.hum);
 
@@ -117,6 +119,7 @@ public class FragmentHome extends Fragment {
 
         btnAllumerAmpouleCuisine = view.findViewById(R.id.btnAllumerCuisine);
         btnEteindreAmpouleCuisine = view.findViewById(R.id.btnEteindreCuisine);
+         */
     }
 
 
