@@ -1,18 +1,15 @@
-package com.adi.pfe2023.activity;
+package com.adi.pfe2023.activity.admin.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.adi.pfe2023.R;
 import com.adi.pfe2023.action.Commande;
 import com.adi.pfe2023.adapter.AdapterListCommandes;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -20,31 +17,25 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class CommandesUserActivity extends AppCompatActivity {
-    final String PATH_COMMANDE= "Commandes";
-    ListView listCommandes;
-    ArrayList<Commande> lesCommandes;
+public class HistoriqueActivity extends AppCompatActivity {
 
-    TextView txtMailUser1Commande;
+    final String PATH_COMMANDE= "Commandes";
+    ListView listCommandesAdmin;
     ImageView imgQuitter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_commandes_user);
+        setContentView(R.layout.activity_historique);
 
         init();
-
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        String mail= user.getEmail();
-
-        txtMailUser1Commande.setText(mail);
 
         CollectionReference collectionReference=
                 FirebaseFirestore.getInstance()
                         .collection(PATH_COMMANDE);
 
-        collectionReference.whereEqualTo("emailUser", mail)
+        collectionReference
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -54,20 +45,17 @@ public class CommandesUserActivity extends AppCompatActivity {
                             resultatCommandes.add(documentSnapshot.toObject(Commande.class));
                         }
                         AdapterListCommandes adapterListCommandes= new AdapterListCommandes(getApplicationContext(), resultatCommandes);
-                        listCommandes.setAdapter(adapterListCommandes);
+                        listCommandesAdmin.setAdapter(adapterListCommandes);
                     }
                 });
 
         imgQuitter.setOnClickListener(
-                v->finish()
+                v-> finish()
         );
-
     }
 
     private void init(){
-        listCommandes= findViewById(R.id.listCommandes);
-        lesCommandes= new ArrayList<>();
-        txtMailUser1Commande= findViewById(R.id.textAdmin);
-        imgQuitter= findViewById(R.id.imgQuitter);
+        listCommandesAdmin= findViewById(R.id.listCommandesAdmin);
+        imgQuitter= findViewById(R.id.imgQuitterHistoriqueAdmin);
     }
 }

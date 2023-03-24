@@ -26,7 +26,7 @@
                 android:layout_marginEnd="16dp">
 
                 <ImageView
-                    android:id="@+id/imgQuitter"
+                    android:id="@+id/imgQuitterHistoriqueAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -44,11 +44,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="-16dp"
+        android:background="@color/lavender"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,7 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="260dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img_maison_intelligente" />
+                        android:src="@drawable/img_background_bleue" />
 
                     <TextView
                         android:id="@+id/textAdmin"
@@ -73,10 +75,10 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="40dp"
                         android:fontFamily="@font/print_clearly"
-                        android:text=""
+                        android:text="Vous êtes administrateur"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
-                        android:textSize="20sp" />
+                        android:textSize="24sp" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
@@ -97,21 +99,21 @@
                         android:layout_below="@+id/linearLayout"
                         android:layout_marginTop="30dp"
                         android:fontFamily="@font/print_clearly"
-                        android:text="Historique de mes commandes"
+                        android:text="Historique de toutes les commandes"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
-                        android:textSize="25sp" />
+                        android:textSize="28sp" />
 
                 </RelativeLayout>
 
                 <ListView
-                    android:id="@+id/listCommandes"
+                    android:id="@+id/listCommandesAdmin"
                     android:layout_width="match_parent"
-                    android:layout_height="470dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="-30dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_height="500dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="-60dp"
+                    android:layout_marginRight="0dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -119,10 +121,7 @@
                     app:cardUseCompatPadding="true"
                     app:contentPadding="16dp">
 
-
                 </ListView>
-
-
 
             </LinearLayout>
 
