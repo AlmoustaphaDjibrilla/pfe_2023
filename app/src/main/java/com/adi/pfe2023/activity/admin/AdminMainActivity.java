@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.adi.pfe2023.R;
 import com.adi.pfe2023.activity.RegisterActivity;
+import com.adi.pfe2023.activity.admin.activity.AllUsersActivity;
 import com.adi.pfe2023.activity.admin.activity.ChercherUser;
 import com.adi.pfe2023.activity.admin.activity.HistoriqueActivity;
 import com.adi.pfe2023.activity.admin.activity.RechercheUserActivity;
@@ -39,6 +40,13 @@ public class AdminMainActivity extends AppCompatActivity {
                 v->{
                     Intent intentHistoriqueCommande= new Intent(getApplicationContext(), HistoriqueActivity.class);
                     startActivity(intentHistoriqueCommande);
+                }
+        );
+
+        cardListAllUsers.setOnClickListener(
+                v->{
+                    Intent intentListAllUsers= new Intent(getApplicationContext(), AllUsersActivity.class);
+                    startActivity(intentListAllUsers);
                 }
         );
 
