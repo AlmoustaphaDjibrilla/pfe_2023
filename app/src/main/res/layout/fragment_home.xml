@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MenuUser">
+    tools:context=".activity.MainPageActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="225dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5">
 
@@ -63,8 +63,8 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="83dp"
+                        android:id="@+id/temperature"
+                        android:layout_width="162dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="20"
@@ -73,8 +73,8 @@
                         android:textSize="26sp" />
 
                     <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="85dp"
+                        android:id="@+id/humidite"
+                        android:layout_width="162dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="20%"
@@ -284,7 +284,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Porte"
+                        android:text="Portes"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="20dp"></TextView>
@@ -317,13 +317,13 @@
                         android:layout_width="120dp"
                         android:layout_height="83dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/camera"></pl.droidsonroids.gif.GifImageView>
+                        android:src="@drawable/ampoules"></pl.droidsonroids.gif.GifImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Camera"
+                        android:text="Ampoules"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="20dp"></TextView>
