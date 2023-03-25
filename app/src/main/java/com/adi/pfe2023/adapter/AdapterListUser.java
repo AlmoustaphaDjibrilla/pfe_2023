@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.adi.pfe2023.R;
 import com.adi.pfe2023.model.UserModel;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.List;
 
@@ -67,9 +66,9 @@ public class AdapterListUser extends BaseAdapter {
 
 
     private void init(View view){
-        imgProfileModelUser= view.findViewById(R.id.imgProfileModelUser);
-        txtNomModelUser= view.findViewById(R.id.txtNomModelUser);
-        txtMailModelUser= view.findViewById(R.id.txtMailModelUser);
-        txtDateEnregistrementModelUser= view.findViewById(R.id.txtDateEnregistrementModelUser);
+        imgProfileModelUser= view.findViewById(R.id.profilUserTrouve);
+        txtNomModelUser= view.findViewById(R.id.nomUserTrouve);
+        txtMailModelUser= view.findViewById(R.id.mailUserTrouve);
+        txtDateEnregistrementModelUser= view.findViewById(R.id.dateEnregistrementUserTrouve);
     }
 }

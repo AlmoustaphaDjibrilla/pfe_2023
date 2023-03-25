@@ -70,34 +70,34 @@ public class FragmentHome extends Fragment {
 
         init(view);
 
-        /*
-        this.currentUser= FirebaseAuth.getInstance().getCurrentUser();
+//
+//        this.currentUser= FirebaseAuth.getInstance().getCurrentUser();
+//
+//
+//        lireTemperatureEtHumidite(Meteo.getInstance());
+//
+//        btnAllumerAmpouleSalon.setOnClickListener(
+//                v-> {
+//                    allumer(AmpouleSalon.getInstance());
+//                }
+//
+//        );
+//
+//        btnEteindreAmpouleSalon.setOnClickListener(
+//                v-> {
+//                    eteindre(AmpouleSalon.getInstance());
+//                }
+//        );
+//
+//        btnAllumerAmpouleCuisine.setOnClickListener(
+//                v->allumer(AmpouleCuisine.getInstance())
+//        );
+//
+//        btnEteindreAmpouleCuisine.setOnClickListener(
+//                v->eteindre(AmpouleCuisine.getInstance())
+//        );
 
 
-        lireTemperatureEtHumidite(new Meteo());
-
-        btnAllumerAmpouleSalon.setOnClickListener(
-                v-> {
-                    allumer(AmpouleSalon.getInstance());
-                }
-
-        );
-
-        btnEteindreAmpouleSalon.setOnClickListener(
-                v-> {
-                    eteindre(AmpouleSalon.getInstance());
-                }
-        );
-
-        btnAllumerAmpouleCuisine.setOnClickListener(
-                v->allumer(AmpouleCuisine.getInstance())
-        );
-
-        btnEteindreAmpouleCuisine.setOnClickListener(
-                v->eteindre(AmpouleCuisine.getInstance())
-        );
-
-        */
         return view;
     }
 
@@ -110,16 +110,16 @@ public class FragmentHome extends Fragment {
      *              fourni par le fragment en cours
      */
     private void init(View view){
-        /*
-        tempText = view.findViewById(R.id.temp);
-        humText = view.findViewById(R.id.hum);
 
-        btnAllumerAmpouleSalon = view.findViewById(R.id.btnAllumer);
-        btnEteindreAmpouleSalon = view.findViewById(R.id.btnEteindre);
+//        tempText = view.findViewById(R.id.temp);
+//        humText = view.findViewById(R.id.hum);
+//
+//        btnAllumerAmpouleSalon = view.findViewById(R.id.btnAllumer);
+//        btnEteindreAmpouleSalon = view.findViewById(R.id.btnEteindre);
+//
+//        btnAllumerAmpouleCuisine = view.findViewById(R.id.btnAllumerCuisine);
+//        btnEteindreAmpouleCuisine = view.findViewById(R.id.btnEteindreCuisine);
 
-        btnAllumerAmpouleCuisine = view.findViewById(R.id.btnAllumerCuisine);
-        btnEteindreAmpouleCuisine = view.findViewById(R.id.btnEteindreCuisine);
-         */
     }
 
 

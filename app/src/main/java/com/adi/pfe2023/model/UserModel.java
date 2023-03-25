@@ -1,8 +1,9 @@
 package com.adi.pfe2023.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class UserModel {
+public class UserModel implements Serializable {
 
     private String Uid;
     private String uriProfil;

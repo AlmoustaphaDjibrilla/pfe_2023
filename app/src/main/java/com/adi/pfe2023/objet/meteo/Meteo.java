@@ -5,8 +5,18 @@ public class Meteo {
     private final String cheminTemperature="test/temperature";
     private final String cheminHumidite="test/humidite";
 
+    private static Meteo meteo;
 
-    public Meteo() {
+
+    private Meteo() {
+    }
+
+    public static synchronized Meteo getInstance(){
+        if (meteo==null){
+            return new Meteo();
+        }
+        else
+            return meteo;
     }
 
     public String getCheminTemperature() {

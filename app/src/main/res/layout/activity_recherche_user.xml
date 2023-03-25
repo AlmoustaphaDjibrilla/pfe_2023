@@ -133,6 +133,7 @@
                             android:textColorHint="#FF8A99AF">
 
                             <EditText
+                                android:id="@+id/txtNomSearchUser"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:drawableStart="@drawable/ic_person"
@@ -152,6 +153,7 @@
                             android:textColorHint="#FF8A99AF">
 
                             <EditText
+                                android:id="@+id/txtDateEnregisrementSearchUser"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:drawableStart="@drawable/ic_date_range_light_blue_24dp"
