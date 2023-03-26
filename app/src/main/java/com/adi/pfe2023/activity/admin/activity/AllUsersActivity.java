@@ -58,6 +58,9 @@ public class AllUsersActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Initialisation des composants de l'activite courante
+     */
     private void init(){
         listUsers= findViewById(R.id.listUsers);
         imgQuitter= findViewById(R.id.imgQuitterListUsers);
