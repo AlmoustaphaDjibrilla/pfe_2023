@@ -79,6 +79,10 @@ public class ChercherUser extends AppCompatActivity {
         );
     }
 
+    /**
+     * Premiere initilisation des
+     * composants de l'actvite courante
+     */
     private void init(){
         txtMailSearchUser= findViewById(R.id.txtMailSearchUser);
         txtNomSearchUser= findViewById(R.id.txtNomSearchUser);
@@ -99,6 +103,13 @@ public class ChercherUser extends AppCompatActivity {
         txtUidUser= dialog.findViewById(R.id.uidUserSupprime);
     }
 
+
+    /***
+     * Remplissage des composants graphiques
+     * du Dialog avec les infos de l'utilisateur recherché
+     * @param userModel, est un UserModel recherche
+     *                   avec des parametres quelconques
+     */
     private void remplirChamps(UserModel userModel){
         if (userModel!=null){
             if (userModel.getNom()!=null){
@@ -116,6 +127,20 @@ public class ChercherUser extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Cette fonction permet de rechercher un UserModel dans
+     * la base de données via différents types de parametre
+     * afin de ne pas sous-traiter la recherche d'un UserModel
+     * uniquement à un type de field
+     * @param nomField , qui est le nom du parametre
+     *                 qui est un quelconque element
+     *                 des attributs du UserModel
+     *                 enregistré dans la Base de données
+     * @param value, qui est la valeur dont on veut faire le
+     *               mappage avec le field ou attribut du
+     *               UserModel qu'on recherche dans la BD
+     */
     private void chercherDonnes(String nomField, String value){
 
         collectionReference
