@@ -54,6 +54,10 @@ public class HistoriqueActivity extends AppCompatActivity {
         );
     }
 
+    /**
+     * Initialisation des composants graphique
+     * de l'activite courante
+     */
     private void init(){
         listCommandesAdmin= findViewById(R.id.listCommandesAdmin);
         imgQuitter= findViewById(R.id.imgQuitterHistoriqueAdmin);
