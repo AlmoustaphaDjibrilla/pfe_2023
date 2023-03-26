@@ -38,6 +38,24 @@
             android:name=".activity.RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.Chambre"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Salon"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Douche"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Ampoules"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Cuisine"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Porte"
+            android:exported="false" />
+        <activity
             android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>

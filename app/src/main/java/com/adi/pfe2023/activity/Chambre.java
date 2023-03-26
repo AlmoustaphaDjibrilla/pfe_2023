@@ -6,6 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.adi.pfe2023.R;
@@ -13,6 +18,7 @@ import com.adi.pfe2023.action.Commande;
 import com.adi.pfe2023.model.UserModel;
 import com.adi.pfe2023.objet.Composant;
 import com.adi.pfe2023.objet.ampoule.Ampoule;
+import com.adi.pfe2023.objet.ampoule.AmpouleSalon;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class Chambre extends AppCompatActivity {
@@ -29,14 +34,33 @@ public class Chambre extends AppCompatActivity {
     private final String detail_extinction_ampoule= "Extinction";
     final String PATH_COMMANDE= "Commandes";
     private final String PATH_USER_DATABASE= "Users";
+    private Switch lampe;
     DatabaseReference databaseReference;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle saveInstance){
+        super.onCreate(saveInstance);
         setContentView(R.layout.activity_chambre);
+        init();
+        lampe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    Ampoule A = AmpouleSalon.getInstance();
+                    allumer(A);
+                }
+                else{
+                    Ampoule B = AmpouleSalon.getInstance();
+                    eteindre(B);
+                }
+            }
+        });
     }
 
+    private void init(){
+        lampe= findViewById(R.id.switch1);
+    }
 
     /**
      * Cette fonction allume une ampoule
@@ -101,7 +125,7 @@ public class Chambre extends AppCompatActivity {
             }
         });
     }
-    
+
 
     private void enregistrerNouvelleCommande(String detailCommande, Composant composant){
 

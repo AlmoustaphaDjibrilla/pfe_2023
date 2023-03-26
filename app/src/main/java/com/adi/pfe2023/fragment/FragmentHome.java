@@ -125,7 +125,7 @@ public class FragmentHome extends Fragment{
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Long value = (Long) snapshot.getValue();
                         if (value!=null)
-                            humtxt.setText(value.toString());
+                            humtxt.setText(value.toString()+" %");
                     }
 
                     @Override
