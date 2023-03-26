@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PFE2023">
         <activity
-            android:name=".activity.Lister"
+            android:name=".activity.admin.activity.SupprimerUserActivity"
             android:exported="false" />
         <activity
             android:name=".activity.admin.activity.AllUsersActivity"
@@ -34,13 +34,6 @@
         <activity
             android:name=".activity.MainPageActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.MenuUser"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="false" />

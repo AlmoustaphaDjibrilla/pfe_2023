@@ -11,6 +11,7 @@ import com.adi.pfe2023.activity.RegisterActivity;
 import com.adi.pfe2023.activity.admin.activity.AllUsersActivity;
 import com.adi.pfe2023.activity.admin.activity.ChercherUser;
 import com.adi.pfe2023.activity.admin.activity.HistoriqueActivity;
+import com.adi.pfe2023.activity.admin.activity.SupprimerUserActivity;
 
 public class AdminMainActivity extends AppCompatActivity {
     CardView cardAddUser, cardSearchUser, cardDeleteUser, cardListAllUsers, cardHistoriqueCommande, cardLogout;
@@ -45,6 +46,13 @@ public class AdminMainActivity extends AppCompatActivity {
                 v->{
                     Intent intentListAllUsers= new Intent(getApplicationContext(), AllUsersActivity.class);
                     startActivity(intentListAllUsers);
+                }
+        );
+
+        cardDeleteUser.setOnClickListener(
+                v->{
+                    Intent intentDeleteUser= new Intent(getApplicationContext(), SupprimerUserActivity.class);
+                    startActivity(intentDeleteUser);
                 }
         );
 

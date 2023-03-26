@@ -67,8 +67,8 @@ public class AdapterListUser extends BaseAdapter {
 
     private void init(View view){
         imgProfileModelUser= view.findViewById(R.id.profilUserTrouve);
-        txtNomModelUser= view.findViewById(R.id.nomUserTrouve);
-        txtMailModelUser= view.findViewById(R.id.mailUserTrouve);
-        txtDateEnregistrementModelUser= view.findViewById(R.id.dateEnregistrementUserTrouve);
+        txtNomModelUser= view.findViewById(R.id.nomUserSupprime);
+        txtMailModelUser= view.findViewById(R.id.mailUserSupprime);
+        txtDateEnregistrementModelUser= view.findViewById(R.id.dateEnregistrementUserSupprime);
     }
 }

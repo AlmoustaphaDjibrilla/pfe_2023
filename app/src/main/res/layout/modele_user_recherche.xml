@@ -38,7 +38,7 @@
                 app:srcCompat="@drawable/icon_profil" />
 
             <TextView
-                android:id="@+id/nomUserTrouve"
+                android:id="@+id/nomUserSupprime"
                 android:layout_width="231dp"
                 android:layout_height="28dp"
                 android:layout_marginStart="20dp"
@@ -51,7 +51,7 @@
                 app:layout_constraintTop_toTopOf="@+id/profilUserTrouve" />
 
             <TextView
-                android:id="@+id/mailUserTrouve"
+                android:id="@+id/mailUserSupprime"
                 android:layout_width="234dp"
                 android:layout_height="23dp"
                 android:layout_marginTop="12dp"
@@ -60,10 +60,10 @@
                 android:textColor="#4b4b4b"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/nomUserTrouve"
+                app:layout_constraintEnd_toEndOf="@+id/nomUserSupprime"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/nomUserTrouve"
-                app:layout_constraintTop_toBottomOf="@+id/nomUserTrouve" />
+                app:layout_constraintStart_toStartOf="@+id/nomUserSupprime"
+                app:layout_constraintTop_toBottomOf="@+id/nomUserSupprime" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -73,11 +73,11 @@
                 android:text="Enregistré le"
                 android:textAlignment="textStart"
                 android:textColor="#4b4b4b"
-                app:layout_constraintStart_toStartOf="@+id/mailUserTrouve"
-                app:layout_constraintTop_toBottomOf="@+id/mailUserTrouve" />
+                app:layout_constraintStart_toStartOf="@+id/mailUserSupprime"
+                app:layout_constraintTop_toBottomOf="@+id/mailUserSupprime" />
 
             <TextView
-                android:id="@+id/dateEnregistrementUserTrouve"
+                android:id="@+id/dateEnregistrementUserSupprime"
                 android:layout_width="133dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="20dp"
@@ -88,7 +88,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
             <TextView
-                android:id="@+id/uidUserTrouve"
+                android:id="@+id/uidUserSupprime"
                 android:layout_width="133dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="32dp"
