@@ -44,6 +44,8 @@ public class CommandesUserActivity extends AppCompatActivity {
                 FirebaseFirestore.getInstance()
                         .collection(PATH_COMMANDE);
 
+        //Faire le mappage avec le mail du UserModel courant
+        //avec le emailUser inscrit dans toutes les commandes
         collectionReference.whereEqualTo("emailUser", mail)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -64,6 +66,10 @@ public class CommandesUserActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Initialisation des composants permettant
+     * d'afficher les commandes qu'un UserModel a exécutées
+     */
     private void init(){
         listCommandes= findViewById(R.id.listCommandes);
         lesCommandes= new ArrayList<>();
