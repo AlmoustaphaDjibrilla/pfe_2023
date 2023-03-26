@@ -53,42 +53,47 @@ public class SupprimerUserActivity extends AppCompatActivity {
                             FirebaseFirestore.getInstance()
                                     .collection(PATH_USER_DATABASE);
 
-                    collectionReference
-                            .whereEqualTo("email", mail)
-                            .get()
-                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    ArrayList<UserModel> lesUsers= new ArrayList<>();
+                    // Vérifier que l'admin a saisi quelque chose
+                    if (mail!=null && !mail.equals("")) {
+                        collectionReference
+                                .whereEqualTo("email", mail)
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        ArrayList<UserModel> lesUsers = new ArrayList<>();
 
-                                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                                        UserModel userModel= doc.toObject(UserModel.class);
-                                        lesUsers.add(userModel);
+                                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                                            UserModel userModel = doc.toObject(UserModel.class);
+                                            lesUsers.add(userModel);
+                                        }
+                                        if (lesUsers.size() > 0) {
+                                            UserModel userModel = queryDocumentSnapshots.getDocuments().get(0).toObject(UserModel.class);
+                                            dialog.setContentView(R.layout.modele_user_supprimer);
+                                            composantsDialog();
+                                            remplirChamps(userModel);
+
+                                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                            dialog.show();
+
+                                            btnSupprimerUser.setOnClickListener(
+                                                    v -> {
+                                                        DocumentReference documentReference =
+                                                                FirebaseFirestore.getInstance()
+                                                                        .collection(PATH_USER_DATABASE)
+                                                                        .document(userModel.getUid());
+
+                                                        documentReference.delete();
+                                                        dialog.dismiss();
+                                                    }
+                                            );
+                                        }
                                     }
-                                    if (lesUsers.size()>0) {
-                                        UserModel userModel = queryDocumentSnapshots.getDocuments().get(0).toObject(UserModel.class);
-                                        dialog.setContentView(R.layout.modele_user_supprimer);
-                                        composantsDialog();
-                                        remplirChamps(userModel);
-
-                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                        dialog.show();
-
-                                        btnSupprimerUser.setOnClickListener(
-                                                v -> {
-                                                    DocumentReference documentReference =
-                                                            FirebaseFirestore.getInstance()
-                                                                    .collection(PATH_USER_DATABASE)
-                                                                    .document(userModel.getUid());
-
-                                                    documentReference.delete();
-                                                    dialog.dismiss();
-                                                }
-                                        );
-                                    }
-                                }
-                            });
+                                });
+                    }else
+                        txtMailSupprime.setError("Veuillez saisir le mail ");
                 });
+
     }
 
 
