@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.adi.pfe2023.R;
 import com.adi.pfe2023.model.UserModel;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -78,6 +79,14 @@ public class SupprimerUserActivity extends AppCompatActivity {
 
                                             btnSupprimerUser.setOnClickListener(
                                                     v -> {
+                                                        FirebaseAuth.getInstance()
+                                                                .signInWithEmailAndPassword(userModel.getEmail(), userModel.getPassword())
+                                                                .addOnSuccessListener(
+                                                                        c->{
+                                                                            c.getUser().delete();
+                                                                        }
+                                                                );
+
                                                         DocumentReference documentReference =
                                                                 FirebaseFirestore.getInstance()
                                                                         .collection(PATH_USER_DATABASE)
