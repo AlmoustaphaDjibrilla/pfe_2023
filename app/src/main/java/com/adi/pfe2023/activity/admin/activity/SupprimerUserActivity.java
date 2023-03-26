@@ -46,6 +46,9 @@ public class SupprimerUserActivity extends AppCompatActivity {
 
         dialog= new Dialog(this);
 
+        //Click sur le button Chercher
+        //Qui permet de chercher un Utilisateur dans la BD
+        //via un Email
         btnSearchUser.setOnClickListener(
                 v->{
                     String mail= txtMailSupprime.getText().toString();
@@ -68,22 +71,31 @@ public class SupprimerUserActivity extends AppCompatActivity {
                                             UserModel userModel = doc.toObject(UserModel.class);
                                             lesUsers.add(userModel);
                                         }
+                                        //Prendre le premier élément de la liste
+                                        //au cas où y aurait plusieurs documents
+                                        //qui satisfont à la requete donnée
                                         if (lesUsers.size() > 0) {
                                             UserModel userModel = queryDocumentSnapshots.getDocuments().get(0).toObject(UserModel.class);
                                             dialog.setContentView(R.layout.modele_user_supprimer);
                                             composantsDialog();
                                             remplirChamps(userModel);
 
+                                            //Affichage du Dialog sur l'écran de l'utilisateur
                                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                             dialog.show();
 
+                                            //Click sur le button Supprimer
                                             btnSupprimerUser.setOnClickListener(
                                                     v -> {
+                                                        //Affecter la connexion actuelle au User qu'on voudrait supprimer
+                                                        //Cela permettra de supprimer le User non seulement dans le FireStore
+                                                        //mais aussi dans la liste Authentification de Firebase
                                                         FirebaseAuth.getInstance()
                                                                 .signInWithEmailAndPassword(userModel.getEmail(), userModel.getPassword())
                                                                 .addOnSuccessListener(
                                                                         c->{
-                                                                            c.getUser().delete();
+                                                                            if (c!=null)
+                                                                                c.getUser().delete();
                                                                         }
                                                                 );
 
@@ -92,6 +104,7 @@ public class SupprimerUserActivity extends AppCompatActivity {
                                                                         .collection(PATH_USER_DATABASE)
                                                                         .document(userModel.getUid());
 
+                                                        //Suppression du UserModel dans la BD FireStore
                                                         documentReference.delete();
                                                         dialog.dismiss();
                                                     }
@@ -135,7 +148,8 @@ public class SupprimerUserActivity extends AppCompatActivity {
      * l'objet Dialog qui va permettre
      * d'afficher les informations de
      * l'utilisatreur qu'on vourait supprimer
-     * @param userModel
+     * @param userModel, qui represente le UserModel
+     *                   qu'on voudrait supprimer
      */
     private void remplirChamps(UserModel userModel){
         if (userModel!=null){
