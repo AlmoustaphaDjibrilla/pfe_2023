@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+
 public abstract class Ampoule extends Composant {
 
     private String cheminAmpoule;
@@ -34,6 +35,7 @@ public abstract class Ampoule extends Composant {
     public void setCheminAmpoule(String cheminAmpoule) {
         this.cheminAmpoule = cheminAmpoule;
     }
+
     /**
      * Cette fonction allume une ampoule
      * passée en paramètre
@@ -114,5 +116,8 @@ public abstract class Ampoule extends Composant {
                         }
                 );
     }
+
+
+
 
 }
