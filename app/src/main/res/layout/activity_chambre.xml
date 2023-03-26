@@ -93,7 +93,7 @@
                     android:padding="25dp"/>
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/switchCh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -128,7 +128,7 @@
                     android:padding="25dp"/>
 
                 <Switch
-                    android:id="@+id/switch2"
+                    android:id="@+id/switchVC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

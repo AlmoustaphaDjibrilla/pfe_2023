@@ -88,7 +88,7 @@
                     android:padding="25dp"/>
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/switchD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
