@@ -106,6 +106,10 @@ public class SupprimerUserActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Initialiser les composants
+     * de l'activite SupprimerUser
+     */
     private void init(){
         txtMailSupprime= findViewById(R.id.txtMailUserSupprime);
         btnSearchUser = findViewById(R.id.btnSearchUserSupprime);
@@ -113,6 +117,10 @@ public class SupprimerUserActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Initialiser les composansts graphiques
+     * de l'objet de type Dialog qui va s'echapper
+     */
     private void composantsDialog(){
         txtMailUserSupprime= dialog.findViewById(R.id.mailUserSupprime);
         txtNomUserSupprime= dialog.findViewById(R.id.nomUserSupprime);
@@ -121,6 +129,14 @@ public class SupprimerUserActivity extends AppCompatActivity {
         btnSupprimerUser= dialog.findViewById(R.id.btnSupprimerUser);
     }
 
+
+    /**
+     * Remplir les composants de
+     * l'objet Dialog qui va permettre
+     * d'afficher les informations de
+     * l'utilisatreur qu'on vourait supprimer
+     * @param userModel
+     */
     private void remplirChamps(UserModel userModel){
         if (userModel!=null){
             if (userModel.getUid()!=null){
