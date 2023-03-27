@@ -1,5 +1,9 @@
 package com.adi.pfe2023.objet.meteo;
 
+import android.util.Log;
+
+import com.adi.pfe2023.model.FirebaseUtils;
+
 public class Meteo {
 
     private final String cheminTemperature="test/temperature";
@@ -26,4 +30,5 @@ public class Meteo {
     public String getCheminHumidite() {
         return cheminHumidite;
     }
+
 }

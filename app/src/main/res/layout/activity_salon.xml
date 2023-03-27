@@ -28,10 +28,10 @@
                     android:padding="25dp"/>
 
                 <TextView
-                    android:id="@+id/temperature"
+                    android:id="@+id/tempS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/humidite"
+                    android:layout_above="@+id/humS"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="118dp"
                     android:layout_marginBottom="22dp"
@@ -39,7 +39,7 @@
                     android:textSize="30sp" />
 
                 <TextView
-                    android:id="@+id/humidite"
+                    android:id="@+id/humS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

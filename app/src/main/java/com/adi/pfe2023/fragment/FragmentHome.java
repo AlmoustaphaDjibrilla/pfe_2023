@@ -1,10 +1,7 @@
 package com.adi.pfe2023.fragment;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +17,9 @@ import com.adi.pfe2023.activity.Cuisine;
 import com.adi.pfe2023.activity.Douche;
 import com.adi.pfe2023.activity.Porte;
 import com.adi.pfe2023.activity.Salon;
+import com.adi.pfe2023.model.FirebaseUtils;
 import com.adi.pfe2023.objet.meteo.Meteo;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.units.qual.C;
 
 public class FragmentHome extends Fragment{
     private CardView D1,D2,D3,D4,D5,D6;
@@ -47,8 +38,6 @@ public class FragmentHome extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        lireTemperatureEtHumidite(Meteo.getInstance());
-
         D1 = (CardView)view.findViewById(R.id.d1);
         D2 = (CardView)view.findViewById(R.id.d2);
         D3 = (CardView)view.findViewById(R.id.d3);
@@ -58,6 +47,8 @@ public class FragmentHome extends Fragment{
 
         temptxt = view.findViewById(R.id.temperature);
         humtxt = view.findViewById(R.id.humidite);
+        lireTemperature(Meteo.getInstance());
+        lireHumidite(Meteo.getInstance());
 
         D1.setOnClickListener(
                 v->{
@@ -94,46 +85,23 @@ public class FragmentHome extends Fragment{
 
     }
 
-    private void lireTemperatureEtHumidite(Meteo meteo){
-        final String cheminTemperature= meteo.getCheminTemperature();
-        final String cheminHumidite= meteo.getCheminHumidite();
+    private void lireTemperature(Meteo meteo){
+        FirebaseUtils.getValueFromFirebase(meteo.getCheminTemperature(), Long.class, new FirebaseUtils.OnValueReceivedListener<Long>() {
+            @Override
+            public void onValueReceived(Long value) {
+                temptxt.setText(value+" C");
+            }
+        });
+    }
 
-        //Se positionner sur l'adresse de la temperature
-        databaseReference= FirebaseDatabase.getInstance().getReference().child(cheminTemperature);
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(cheminTemperature);
-        databaseReference.addValueEventListener(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Long value = (Long) snapshot.getValue();
-                        if (value!=null) {
-                            temptxt.setText(value+" °C");
-                        }
-                    }
+    private void lireHumidite(Meteo meteo){
+        FirebaseUtils.getValueFromFirebase(meteo.getCheminHumidite(), Long.class, new FirebaseUtils.OnValueReceivedListener<Long>() {
+            @Override
+            public void onValueReceived(Long value) {
+                humtxt.setText(value+" %");
+            }
+        });
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-                }
-        );
-
-        databaseReference= FirebaseDatabase.getInstance().getReference().child(cheminHumidite);
-        databaseReference.addValueEventListener(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Long value = (Long) snapshot.getValue();
-                        if (value!=null)
-                            humtxt.setText(value.toString()+" %");
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-                }
-        );
     }
 
 

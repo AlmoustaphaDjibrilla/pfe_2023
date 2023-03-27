@@ -26,6 +26,7 @@ public abstract class Ampoule extends Composant {
     private final String detail_extinction_ampoule= "Extinction";
     final String PATH_COMMANDE= "Commandes";
     private final String PATH_USER_DATABASE= "Users";
+    public String ETAT="";
     DatabaseReference databaseReference;
 
     public String getCheminAmpoule() {
@@ -35,6 +36,10 @@ public abstract class Ampoule extends Composant {
     public void setCheminAmpoule(String cheminAmpoule) {
         this.cheminAmpoule = cheminAmpoule;
     }
+    public void setEtat(String e){
+        ETAT=e;
+    }
+
 
     /**
      * Cette fonction allume une ampoule
@@ -54,6 +59,7 @@ public abstract class Ampoule extends Composant {
                     if (value.equals("OFF")) {
                         databaseReference.setValue("ON");
                         enregistrerNouvelleCommande(detail_allumer_ampoule, ampoule);
+                        ampoule.setEtat("ON");
                     }
                 }
             }
@@ -82,6 +88,7 @@ public abstract class Ampoule extends Composant {
                     if (value.equals("ON")) {
                         databaseReference.setValue("OFF");
                         enregistrerNouvelleCommande(detail_extinction_ampoule, ampoule);
+                        ampoule.setEtat("OFF");
                     }
                 }
             }
