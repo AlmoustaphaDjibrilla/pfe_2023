@@ -20,7 +20,7 @@ public class FirebaseUtils {
 
     public static <T> void getValueFromFirebase(String path,Class<T> valueType, final OnValueReceivedListener<T> listener) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(path);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 T value = dataSnapshot.getValue(valueType);
