@@ -9,7 +9,7 @@ public class AmpouleChambre extends Ampoule{
     private AmpouleChambre() {
         super();
         this.setCheminAmpoule(cheminAmpouleChambre);
-        this.setNomComposant("Ampoule Cuisine");
+        this.setNomComposant("Ampoule Chambre");
     }
 
     public static synchronized AmpouleChambre getInstance(){

@@ -16,7 +16,7 @@ import com.adi.pfe2023.objet.meteo.Meteo;
 public class Chambre extends AppCompatActivity {
     private Switch lampe;
     Meteo meteo = Meteo.getInstance();
-    Ampoule A = AmpouleChambre.getInstance();
+    Ampoule ampouleChambre = AmpouleChambre.getInstance();
     private TextView humC,tempC;
 
 
@@ -29,10 +29,10 @@ public class Chambre extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    A.allumer(A);
+                    ampouleChambre.allumer(ampouleChambre);
                 }
                 else{
-                    A.eteindre(A);
+                    ampouleChambre.eteindre(ampouleChambre);
                 }
             }
         });
@@ -42,7 +42,7 @@ public class Chambre extends AppCompatActivity {
         lampe= findViewById(R.id.switchCh);
         humC =findViewById(R.id.humC);
         tempC=findViewById(R.id.tempC);
-        FirebaseUtils.getValueFromFirebase(A.getCheminAmpoule(), String.class, new FirebaseUtils.OnValueReceivedListener<String>() {
+        FirebaseUtils.getValueFromFirebase(ampouleChambre.getCheminAmpoule(), String.class, new FirebaseUtils.OnValueReceivedListener<String>() {
             @Override
             public void onValueReceived(String value)
             {

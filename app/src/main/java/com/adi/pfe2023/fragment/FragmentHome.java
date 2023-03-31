@@ -1,5 +1,8 @@
 package com.adi.pfe2023.fragment;
 
+import static com.adi.pfe2023.R.*;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,11 +22,12 @@ import com.adi.pfe2023.activity.Porte;
 import com.adi.pfe2023.activity.Salon;
 import com.adi.pfe2023.model.FirebaseUtils;
 import com.adi.pfe2023.objet.meteo.Meteo;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 public class FragmentHome extends Fragment{
     private CardView D1,D2,D3,D4,D5,D6;
-    private TextView temptxt, humtxt;
+    private TextView temptxt, humtxt, txtUserCourant;
     private DatabaseReference databaseReference;
 
     public FragmentHome (){
@@ -35,18 +39,21 @@ public class FragmentHome extends Fragment{
         super.onCreate(saveInstanceState);
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        D1 = (CardView)view.findViewById(R.id.d1);
-        D2 = (CardView)view.findViewById(R.id.d2);
-        D3 = (CardView)view.findViewById(R.id.d3);
-        D4 = (CardView)view.findViewById(R.id.d4);
-        D5 = (CardView)view.findViewById(R.id.d5);
-        D6 = (CardView)view.findViewById(R.id.d6);
+        View view = inflater.inflate(layout.fragment_home, container, false);
+        D1 = (CardView)view.findViewById(id.d1);
+        D2 = (CardView)view.findViewById(id.d2);
+        D3 = (CardView)view.findViewById(id.d3);
+        D4 = (CardView)view.findViewById(id.d4);
+        D5 = (CardView)view.findViewById(id.d5);
+        D6 = (CardView)view.findViewById(id.d6);
 
-        temptxt = view.findViewById(R.id.temperature);
-        humtxt = view.findViewById(R.id.humidite);
+        txtUserCourant= view.findViewById(id.txtUserCourantFragmentHome);
+        txtUserCourant.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        temptxt = view.findViewById(id.temperature);
+        humtxt = view.findViewById(id.humidite);
         lireTemperature(Meteo.getInstance());
         lireHumidite(Meteo.getInstance());
 
@@ -89,7 +96,7 @@ public class FragmentHome extends Fragment{
         FirebaseUtils.getValueFromFirebase(meteo.getCheminTemperature(), Long.class, new FirebaseUtils.OnValueReceivedListener<Long>() {
             @Override
             public void onValueReceived(Long value) {
-                temptxt.setText(value+" C");
+                temptxt.setText(value+" °C");
             }
         });
     }
