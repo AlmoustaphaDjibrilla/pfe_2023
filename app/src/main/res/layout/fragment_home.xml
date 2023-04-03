@@ -1,90 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainPageActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:orientation="vertical"
-        android:weightSum="10"
-        app:layout_constraintBaseline_toBaselineOf="parent"
-        tools:layout_editor_absoluteX="0dp">
-
-        <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtUserCourantFragmentHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:fontFamily="@font/calibri"
+            android:text="User"
+            android:textAllCaps="true"
+            android:textSize="14sp" />
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:orientation="vertical">
+            android:layout_height="190dp">
 
-            <TextView
-                android:id="@+id/txtUserCourantFragmentHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:fontFamily="@font/calibri"
-                android:text="User"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="190dp">
+                android:layout_height="150dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="25dp"
+                    android:text="Weather"
+                    android:textSize="30sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="25dp"
-                        android:text="Weather"
-                        android:textSize="30sp" />
+                <TextView
+                    android:id="@+id/temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/humidite"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="118dp"
+                    android:layout_marginBottom="22dp"
+                    android:textSize="30sp" />
 
-                    <TextView
-                        android:id="@+id/temperature"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/humidite"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="118dp"
-                        android:layout_marginBottom="22dp"
-                        android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/humidite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginEnd="116dp"
-                        android:layout_marginBottom="45dp"
-                        android:textSize="30sp" />
+                <TextView
+                    android:id="@+id/humidite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="116dp"
+                    android:layout_marginBottom="45dp"
+                    android:textSize="30sp" />
 
 
-                </RelativeLayout>
-
-                <pl.droidsonroids.gif.GifImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/humidite"
-                    android:layout_marginTop="-0dp"
-                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
-        </LinearLayout>
 
-        <!-- Composant maison-->
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/humidite"
+                android:layout_marginTop="-0dp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="492dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="7"
             android:alignmentMode="alignMargins"
@@ -326,7 +315,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <!-- fin Card 6-->
-        </GridLayout>
 
+        </GridLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
