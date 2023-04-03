@@ -8,7 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 //import android.support.v7.app.AppCompatActivity;
 import android.content.pm.PackageManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -157,6 +160,7 @@ public class LoginActivity extends Activity implements Serializable {
                 if (presenceValue==1) {
                     notification();
                     vibrationTelephone();
+                    sonnerieTelephone();
                     reference.setValue(0L);
                 }
             }
@@ -169,9 +173,33 @@ public class LoginActivity extends Activity implements Serializable {
         });
     }
 
+    /**
+     * Permet de faire vibrer le téléphone
+     */
     private void vibrationTelephone(){
         Vibrator vibrator= (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createOneShot(3500, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    /**
+     * Permet de faire sonner le telephone
+     */
+    private void sonnerieTelephone(){
+        Ringtone ringtone= RingtoneManager
+                .getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
+        //ringtone.play();
+        new CountDownTimer(20000, 1000){
+
+            @Override
+            public void onTick(long l) {
+                ringtone.play();
+            }
+
+            @Override
+            public void onFinish() {
+                ringtone.stop();
+            }
+        }.start();
     }
 
     /**
