@@ -31,7 +31,7 @@ public class RegisterActivity extends Activity {
     private CollectionReference collectionUsers;
     private UserModel userModel;
 
-    TextView txtEnregistre, txtNom, txtMail, txtPassword1, txtTelephone;
+    TextView  txtNom, txtMail, txtPassword1, txtTelephone;
     Button btnSave;
 
 
@@ -60,7 +60,6 @@ public class RegisterActivity extends Activity {
     }
 
     private void init(){
-        txtEnregistre= findViewById(R.id.txtEnregistre);
         txtNom= findViewById(R.id.txtNom);
         txtMail= findViewById(R.id.txtMail);
         txtPassword1= findViewById(R.id.txtPassword1);

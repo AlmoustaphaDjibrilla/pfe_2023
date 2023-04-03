@@ -187,7 +187,6 @@ public class LoginActivity extends Activity implements Serializable {
     private void sonnerieTelephone(){
         Ringtone ringtone= RingtoneManager
                 .getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
-        //ringtone.play();
         new CountDownTimer(20000, 1000){
 
             @Override

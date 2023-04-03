@@ -113,14 +113,4 @@
         app:layout_constraintStart_toStartOf="@+id/txtTelephoneUserRegister"
         app:layout_constraintTop_toBottomOf="@+id/txtTelephoneUserRegister" />
 
-    <TextView
-        android:id="@+id/txtEnregistre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Déjà enregistré(e)?"
-        android:textColor="@color/purple_700"
-        app:layout_constraintEnd_toEndOf="@+id/btnSave"
-        app:layout_constraintStart_toStartOf="@+id/btnSave"
-        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 </androidx.constraintlayout.widget.ConstraintLayout>
