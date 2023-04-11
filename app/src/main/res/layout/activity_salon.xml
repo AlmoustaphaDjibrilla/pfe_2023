@@ -132,6 +132,20 @@
                     android:progress="1"
                     android:scaleX="1.5"
                     android:scaleY="1.5"/>
+                <Switch
+                    android:id="@+id/switchVS"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:max="180"
+                    android:progress="0"
+                    android:indeterminate="false"
+                    android:thumb="@drawable/curseur_porte"
+                    android:progressDrawable="@drawable/seekbar_background"/>
                 <pl.droidsonroids.gif.GifImageView
                     android:layout_width="103dp"
                     android:layout_height="120dp"
