@@ -24,8 +24,6 @@ public abstract class Ampoule extends Composant {
     private String cheminAmpoule;
     private final String detail_allumer_ampoule= "Allumage";
     private final String detail_extinction_ampoule= "Extinction";
-    final String PATH_COMMANDE= "Commandes";
-    private final String PATH_USER_DATABASE= "Users";
     public String ETAT="";
     DatabaseReference databaseReference;
 
@@ -98,33 +96,4 @@ public abstract class Ampoule extends Composant {
             }
         });
     }
-
-
-    private void enregistrerNouvelleCommande(String detailCommande, Composant composant){
-
-        DocumentReference docRef= FirebaseFirestore.getInstance()
-                .collection(PATH_USER_DATABASE)
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-        docRef.get()
-                .addOnSuccessListener(
-                        documentSnapshot -> {
-                            Commande commande= new Commande(composant);
-                            UserModel userModel= documentSnapshot.toObject(UserModel.class);
-                            commande.setDetail_commande(detailCommande);
-                            commande.setUserModel(userModel);
-                            commande.setEmailUser(userModel.getEmail());
-
-                            DocumentReference dfReferenceSaveCommande=
-                                    FirebaseFirestore.getInstance()
-                                            .collection(PATH_COMMANDE)
-                                            .document();
-                            dfReferenceSaveCommande.set(commande);
-                        }
-                );
-    }
-
-
-
-
 }

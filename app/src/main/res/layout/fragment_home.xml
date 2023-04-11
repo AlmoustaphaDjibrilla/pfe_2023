@@ -263,16 +263,16 @@
                         android:layout_width="120dp"
                         android:layout_height="83dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/porte"></pl.droidsonroids.gif.GifImageView>
+                        android:src="@drawable/vent1"></pl.droidsonroids.gif.GifImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Portes"
+                        android:text="Ventilateurs"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="20dp"></TextView>
+                        android:textSize="18dp"></TextView>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <!-- fin Card 5-->
